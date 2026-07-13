@@ -7,6 +7,7 @@ import SocialLinks from "./SocialLinks";
 const LINKS = [
   { href: "#idea", label: "The idea" },
   { href: "#work", label: "What we do" },
+  { href: "#clients", label: "Clients" },
   { href: "#packages", label: "Packages" },
   { href: "#contact", label: "Contact" },
 ];
@@ -118,13 +119,14 @@ export default function Nav() {
           />
         </a>
 
-        <ul className="hidden items-center gap-9 md:flex">
+        {/* five items now, so the gap tightens a notch before it grows again */}
+        <ul className="hidden items-center gap-7 md:flex lg:gap-9">
           {LINKS.map((link) => (
             <li key={link.href}>
               {/* padded so the tap target clears 40px, not just the text height */}
               <a
                 href={link.href}
-                className="label block py-3 text-white/65 transition-colors hover:text-[#f8e71c]"
+                className="label block py-3 whitespace-nowrap text-white/65 transition-colors hover:text-[#f8e71c]"
               >
                 {link.label}
               </a>
