@@ -1,5 +1,5 @@
 import Reveal from "./Reveal";
-import { CONTACT, PACKAGES } from "@/lib/content";
+import { PACKAGES, packageEnquiry } from "@/lib/content";
 
 export default function Packages() {
   return (
@@ -65,30 +65,6 @@ export default function Packages() {
                   {pkg.pitch}
                 </p>
 
-                <div className="mt-8 flex items-baseline gap-2">
-                  <span
-                    className={`label ${
-                      featured ? "text-[#2c1053]/50" : "text-white/45"
-                    }`}
-                  >
-                    {pkg.currency}
-                  </span>
-                  <span
-                    className={`display text-[3.4rem] ${
-                      featured ? "text-[#2c1053]" : "text-white"
-                    }`}
-                  >
-                    {pkg.price}
-                  </span>
-                  <span
-                    className={`label ${
-                      featured ? "text-[#2c1053]/50" : "text-white/45"
-                    }`}
-                  >
-                    / mo
-                  </span>
-                </div>
-
                 <hr
                   className={`mt-8 border-0 ${
                     featured ? "thread-rule" : "h-px bg-white/12"
@@ -125,10 +101,10 @@ export default function Packages() {
                   ))}
                 </ul>
 
+                {/* Opens WhatsApp with the whole enquiry already typed: the
+                    package, what's in it, and the ask for a price. */}
                 <a
-                  href={`${CONTACT.whatsapp}?text=${encodeURIComponent(
-                    `Hi LOOM, I'd like to start on the ${pkg.name} package.`,
-                  )}`}
+                  href={packageEnquiry(pkg)}
                   target="_blank"
                   rel="noopener noreferrer"
                   className={`label group mt-10 inline-flex items-center justify-center gap-2.5 rounded-full px-6 py-4 transition-transform duration-200 hover:-translate-y-0.5 ${
@@ -137,7 +113,7 @@ export default function Packages() {
                       : "border border-white/25 text-white hover:border-[#f8e71c] hover:text-[#f8e71c]"
                   }`}
                 >
-                  Start on {pkg.name}
+                  Ask about {pkg.name}
                   <span className="transition-transform duration-200 group-hover:translate-x-1">
                     →
                   </span>

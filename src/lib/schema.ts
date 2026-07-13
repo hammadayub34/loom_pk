@@ -20,7 +20,6 @@ export const businessSchema = {
   logo: `${SITE_URL}/brand/loom_mark.png`,
   image: `${SITE_URL}/brand/og.png`,
   telephone: CONTACT.phoneIntl,
-  priceRange: "PKR 50,000–100,000",
   currenciesAccepted: "PKR",
   address: {
     "@type": "PostalAddress",
@@ -35,6 +34,9 @@ export const businessSchema = {
   },
   sameAs: [CONTACT.instagram, CONTACT.facebook, CONTACT.linkedin],
   knowsAbout: SERVICES.map((service) => service.title),
+  // Named, described, but deliberately unpriced. The cards stopped printing a
+  // figure so the number arrives in conversation; leaving prices in the markup
+  // would hand them straight back to Google and undo that.
   hasOfferCatalog: {
     "@type": "OfferCatalog",
     name: "Monthly retainers",
@@ -42,15 +44,6 @@ export const businessSchema = {
       "@type": "Offer",
       name: pkg.name,
       description: pkg.pitch,
-      price: pkg.price.replace(/,/g, ""),
-      priceCurrency: pkg.currency,
-      priceSpecification: {
-        "@type": "UnitPriceSpecification",
-        price: pkg.price.replace(/,/g, ""),
-        priceCurrency: pkg.currency,
-        billingIncrement: 1,
-        unitCode: "MON", // per month
-      },
       itemOffered: {
         "@type": "Service",
         name: `${pkg.name} retainer`,

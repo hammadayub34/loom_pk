@@ -79,8 +79,6 @@ export const PILLARS = [
 
 export type Package = {
   name: string;
-  price: string;
-  currency: string;
   pitch: string;
   badge?: string;
   featured?: boolean;
@@ -90,8 +88,6 @@ export type Package = {
 export const PACKAGES: Package[] = [
   {
     name: "Starter",
-    price: "50,000",
-    currency: "PKR",
     pitch: "Get the threads in order. A steady, consistent presence, every month.",
     includes: [
       "12 creative posts",
@@ -104,8 +100,6 @@ export const PACKAGES: Package[] = [
   },
   {
     name: "Growth",
-    price: "70,000",
-    currency: "PKR",
     pitch: "Add motion and intent. Reels, research, and a strategy that moves each month.",
     badge: "Most popular",
     featured: true,
@@ -123,8 +117,6 @@ export const PACKAGES: Package[] = [
   },
   {
     name: "Premium",
-    price: "100,000",
-    currency: "PKR",
     pitch: "The full loom. Campaign planning, priority everything, nothing left loose.",
     badge: "Best value",
     includes: [
@@ -143,3 +135,24 @@ export const PACKAGES: Package[] = [
     ],
   },
 ];
+
+/**
+ * A WhatsApp deep link that arrives as a real enquiry rather than a bare "hi".
+ *
+ * The card no longer prints a price, so the message has to carry everything the
+ * conversation needs to start: which package, exactly what the visitor read in
+ * it, and the ask. Built from `includes` itself, so the message can never
+ * describe a package the card doesn't.
+ */
+export function packageEnquiry(pkg: Package) {
+  const message = [
+    `Hi LOOM, I'm interested in the ${pkg.name} package.`,
+    "",
+    "What it includes:",
+    ...pkg.includes.map((item) => `• ${item}`),
+    "",
+    "Could you share the pricing and how we'd get started?",
+  ].join("\n");
+
+  return `${CONTACT.whatsapp}?text=${encodeURIComponent(message)}`;
+}
