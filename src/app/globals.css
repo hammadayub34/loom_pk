@@ -1,26 +1,172 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  --color-loom-violet: #4c1b8f;
+  --color-electric: #743ac8;
+  --color-voltage: #f8e71c;
+  --color-studio: #ffffff;
+  --color-midnight: #2c1053;
+
+  --font-display: var(--font-bricolage), ui-sans-serif, sans-serif;
+  --font-body: var(--font-dm-sans), ui-sans-serif, sans-serif;
+  --font-mono: var(--font-dm-mono), ui-monospace, monospace;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
+  background-color: #2c1053;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: #2c1053;
+  color: #ffffff;
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: #f8e71c;
+  color: #2c1053;
+}
+
+:focus-visible {
+  outline: 3px solid #f8e71c;
+  outline-offset: 3px;
+  border-radius: 3px;
+}
+
+/* Utility voice: mono labels, tracked and uppercase (per type scale) */
+.label {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.display {
+  font-family: var(--font-display);
+  font-weight: 800;
+  line-height: 0.88;
+  letter-spacing: -0.035em;
+}
+
+.heading {
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+}
+
+/* The Weave: warp and weft, held behind the message, never fighting it */
+.weave-bg {
+  background-image:
+    repeating-linear-gradient(
+      90deg,
+      rgba(116, 58, 200, 0.26) 0 1px,
+      transparent 1px 15px
+    ),
+    repeating-linear-gradient(
+      0deg,
+      rgba(116, 58, 200, 0.16) 0 1px,
+      transparent 1px 15px
+    );
+}
+
+/* Grain: keeps the flat violet from reading as plastic */
+.grain::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.5;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='0.35'/%3E%3C/svg%3E");
+}
+
+/* The yellow weft line that stitches sections to each other */
+.thread-rule {
+  height: 1px;
+  border: 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(248, 231, 28, 0.75) 20%,
+    rgba(248, 231, 28, 0.75) 80%,
+    transparent
+  );
+}
+
+/* Scroll reveal: loose thread settles into the fabric */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition:
+    opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal[data-woven="true"] {
+  opacity: 1;
+  transform: none;
+}
+
+/* Without JS the observer never fires, and everything below the hero would sit
+   at opacity 0: a blank page rather than an unanimated one. */
+@media (scripting: none) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes slide {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* Page-load sequence: each line arrives on its own beat */
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(26px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* The weft thread drawing itself under the word it holds */
+@keyframes draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: slide 42s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
 }
