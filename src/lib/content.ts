@@ -6,7 +6,7 @@ export const CONTACT = {
   whatsapp: "https://wa.me/923027542741",
   instagram: "https://instagram.com/loom_ots",
   instagramHandle: "@loom_ots",
-  facebook: "https://facebook.com/Loom.pk",
+  facebook: "https://www.facebook.com/people/Loompk/61591721756886/",
   facebookHandle: "Loom.pk",
   linkedin: "https://www.linkedin.com/in/loom-pk-b33a5341b/",
   linkedinHandle: "LOOM PK",
