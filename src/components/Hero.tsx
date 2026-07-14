@@ -102,8 +102,8 @@ export default function Hero() {
             <img
               src="/brand/loom_logo_animation.webp"
               alt="The LOOM wordmark, animating"
-              width={340}
-              height={191}
+              width={960}
+              height={570}
               fetchPriority="high" // above the fold, and a candidate for LCP
               // no drop-shadow: the guide forbids one on the mark, and filtering
               // a per-frame alpha against the moving weave made the edge shimmer

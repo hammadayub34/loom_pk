@@ -112,8 +112,8 @@ export default function Nav() {
           <Image
             src="/brand/loom_mark.png"
             alt=""
-            width={628}
-            height={348}
+            width={2083}
+            height={1158}
             priority
             className="h-9 w-auto md:h-10"
           />

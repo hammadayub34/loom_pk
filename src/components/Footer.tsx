@@ -12,8 +12,8 @@ export default function Footer() {
             <Image
               src="/brand/loom_mark.png"
               alt="LOOM"
-              width={628}
-              height={348}
+              width={2083}
+              height={1158}
               className="h-12 w-auto shrink-0"
             />
             <p className="heading max-w-xs text-xl text-white">

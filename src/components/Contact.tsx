@@ -13,9 +13,9 @@ function Mascot({ className = "" }: { className?: string }) {
   return (
     <Image
       src="/brand/loom_mascot_cut.png"
-      alt="The LOOM mascot, in spectacles, holding a shuttle"
-      width={154}
-      height={364}
+      alt="The LOOM mascot, in spectacles, holding a stylus"
+      width={600}
+      height={1315}
       className={`h-auto drop-shadow-[0_30px_45px_rgba(0,0,0,0.4)] ${className}`}
     />
   );
@@ -101,8 +101,10 @@ export default function Contact() {
                   </ul>
                 </Reveal>
 
+                {/* Nudged on the image, not on Reveal: Reveal animates transform
+                    to slide the block in, and a transform here would fight it. */}
                 <Reveal delay={300} className="shrink-0 sm:hidden">
-                  <Mascot className="w-[112px]" />
+                  <Mascot className="w-[142px] -translate-x-2 translate-y-4" />
                 </Reveal>
               </div>
             </div>
@@ -112,7 +114,7 @@ export default function Contact() {
             delay={200}
             className="hidden justify-self-center sm:block lg:justify-self-end"
           >
-            <Mascot className="w-[190px] md:w-[240px]" />
+            <Mascot className="w-[230px] -translate-x-4 translate-y-6 md:w-[290px] md:-translate-x-6 md:translate-y-8" />
           </Reveal>
         </div>
       </div>
