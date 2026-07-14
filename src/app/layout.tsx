@@ -39,8 +39,8 @@ const SHARE_CARD = {
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "LOOM · Where every brand becomes stronger",
-    template: "%s · LOOM",
+    default: "Loom · Where every brand becomes stronger",
+    template: "%s · Loom",
   },
   description:
     "LOOM is a marketing agency in Gujranwala that weaves strategy, story, design, events and reach into one fabric. Digital, events, PR, web and print.",
