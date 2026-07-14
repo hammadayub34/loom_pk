@@ -6,10 +6,10 @@ export type Client = {
   height: number;
   /**
    * The ground the mark was drawn for, and the colour its tile is painted.
-   * They can't share one: NUCES, TBS, VU, Mall of Gujranwala and Oresto are
-   * drawn for dark and vanish on white; the rest are drawn for light. Painting
-   * the tile to match means the logo sits in it seamlessly, and it spares us
-   * repainting someone else's mark to fit our palette -- which isn't ours to do.
+   * They can't share one: NUCES, TBS, VU and Mall of Gujranwala are drawn for
+   * dark and vanish on white; the rest are drawn for light. Painting the tile to
+   * match means the logo sits in it seamlessly, and it spares us repainting
+   * someone else's mark to fit our palette -- which isn't ours to do.
    */
   ground: string;
   /**
@@ -89,25 +89,11 @@ export const CLIENTS: Client[] = [
     ground: "#000000",
   },
   {
-    name: "Oresto Pizza",
-    logo: "/clients/oresto-pizza.png",
-    width: 239,
-    height: 247,
-    ground: "#0c0606",
-  },
-  {
     name: "Pakistan Army",
     logo: "/clients/pakistan-army.png",
     width: 384,
     height: 440,
     ground: "#fcfcfc",
-  },
-  {
-    name: "PSCA",
-    logo: "/clients/psca.png",
-    width: 271,
-    height: 250,
-    ground: "#ffffff",
   },
   {
     name: "QDPS",
