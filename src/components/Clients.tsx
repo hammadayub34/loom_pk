@@ -1,11 +1,6 @@
 import Image from "next/image";
 import Reveal from "./Reveal";
 import { CLIENTS } from "@/lib/clients";
-import { CONTACT } from "@/lib/content";
-
-const enquiry = `${CONTACT.whatsapp}?text=${encodeURIComponent(
-  "Hi LOOM, I'd like to talk about weaving my brand in. Could we start a conversation?",
-)}`;
 
 export default function Clients() {
   return (
@@ -22,79 +17,52 @@ export default function Clients() {
 
           <Reveal delay={120}>
             <p className="max-w-sm text-lg leading-relaxed text-[#2c1053]/70">
-              A brand arrives as loose thread and leaves as fabric. These are the
-              ones on the loom right now.
+              A brand arrives as loose thread and leaves as fabric.{" "}
+              <span className="text-[#2c1053]">{CLIENTS.length} of them</span>{" "}
+              are on the loom.
             </p>
           </Reveal>
         </div>
 
-        <div className="mt-20 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-20 grid grid-cols-2 gap-4 sm:grid-cols-3 sm:gap-5 lg:grid-cols-4 lg:gap-6">
           {CLIENTS.map((client, i) => (
             <Reveal
               key={client.name}
-              delay={i * 110}
-              className="group overflow-hidden rounded-3xl border border-[#2c1053]/12 transition-colors duration-300 hover:border-[#743ac8]"
+              // capped, or the last tile of twenty-four would arrive two seconds late
+              delay={Math.min(i, 7) * 60}
+              className="group"
             >
-              {/* Each mark sits on the ground it was drawn for. A white plate
-                  beside an ink one is deliberate: Oresto's plate is white
-                  line-art and vanishes on light, UKS carries a JPEG halo on
-                  anything but white, and repainting a client's logo to match
-                  ours isn't a call we get to make. */}
+              {/* The tile is painted the ground its mark was drawn for, so the
+                  logo sits in it seamlessly and we own the padding rather than
+                  inheriting whatever whitespace the source file came with. */}
               <div
-                className={`flex aspect-[5/4] items-center justify-center border-b border-[#2c1053]/10 p-10 ${
-                  client.ground === "light" ? "bg-white" : "bg-[#0b0505]"
-                }`}
+                style={{ backgroundColor: client.ground }}
+                className="flex aspect-[4/3] items-center justify-center overflow-hidden rounded-2xl border border-[#2c1053]/10 transition-colors duration-300 group-hover:border-[#743ac8]"
               >
-                <Image
-                  src={client.logo}
-                  alt={`${client.name} logo`}
-                  width={client.width}
-                  height={client.height}
-                  className="max-h-full w-auto max-w-[78%] object-contain transition-transform duration-500 group-hover:scale-[1.04]"
-                />
-              </div>
-
-              <div className="p-7">
-                <h3 className="heading text-2xl text-[#2c1053] transition-colors duration-300 group-hover:text-[#743ac8]">
-                  {client.name}
-                </h3>
-                <p className="label mt-2.5 text-[#2c1053]/45">{client.sector}</p>
-
-                {client.work && (
-                  <p className="mt-4 leading-relaxed text-[#2c1053]/70">
-                    {client.work}
-                  </p>
-                )}
-                {client.result && (
-                  <p className="label mt-3 text-[#743ac8]">{client.result}</p>
+                {client.fill ? (
+                  <Image
+                    src={client.logo}
+                    alt={`${client.name} logo`}
+                    width={client.width}
+                    height={client.height}
+                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+                  />
+                ) : (
+                  <Image
+                    src={client.logo}
+                    alt={`${client.name} logo`}
+                    width={client.width}
+                    height={client.height}
+                    className="max-h-[72%] w-auto max-w-[76%] object-contain transition-transform duration-500 group-hover:scale-[1.05]"
+                  />
                 )}
               </div>
+
+              <p className="label mt-3.5 text-center text-[11px] leading-snug text-[#2c1053]/50 transition-colors duration-300 group-hover:text-[#743ac8]">
+                {client.name}
+              </p>
             </Reveal>
           ))}
-
-          {/* The empty heddle. A short roster reads as honest when the gap is
-              offered rather than padded out, and this slot converts. */}
-          <Reveal delay={CLIENTS.length * 110} className="flex">
-            <a
-              href={enquiry}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group flex flex-1 flex-col items-center justify-center rounded-3xl border border-dashed border-[#2c1053]/25 p-10 text-center transition-colors duration-300 hover:border-[#743ac8] hover:bg-[#743ac8]/[0.04]"
-            >
-              <span
-                aria-hidden
-                className="heading text-5xl text-[#2c1053]/20 transition-colors duration-300 group-hover:text-[#743ac8]"
-              >
-                +
-              </span>
-              <span className="heading mt-5 text-2xl text-[#2c1053] transition-colors duration-300 group-hover:text-[#743ac8]">
-                Your brand next.
-              </span>
-              <span className="label mt-3 text-[#2c1053]/45">
-                Start a conversation
-              </span>
-            </a>
-          </Reveal>
         </div>
       </div>
     </section>
